@@ -1,0 +1,165 @@
+swagger: "2.0"
+info:
+  title: Argent Bank Transactions API
+  description: API endpoints for managing bank transactions
+  version: "1.0.0"
+  termsOfService: http://swagger.io/terms/
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+
+paths:
+
+  /transactions:
+    get:
+      tags:
+        - Transactions
+      summary: Get all transactions for current month
+      description: Returns all transactions grouped by account for the current month
+      security:
+        - Bearer: []
+      parameters:
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+          description: Bearer token
+      responses:
+        200:
+          description: Transactions retrieved successfully
+          schema:
+            $ref: "#/definitions/TransactionsResponse"
+        401:
+          description: Unauthorized - invalid or missing token
+        500:
+          description: Internal server error
+
+  /transactions/{transactionId}:
+    get:
+      tags:
+        - Transactions
+      summary: Get details of a single transaction
+      description: Returns full details of one transaction
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: ID of the transaction
+      responses:
+        200:
+          description: Transaction details retrieved successfully
+          schema:
+            $ref: "#/definitions/TransactionDetailResponse"
+        401:
+          description: Unauthorized
+        404:
+          description: Transaction not found
+        500:
+          description: Internal server error
+
+    patch:
+      tags:
+        - Transactions
+      summary: Update transaction information
+      description: Modify category or note of a transaction
+      security:
+        - Bearer: []
+      parameters:
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: ID of the transaction
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/TransactionUpdate"
+      responses:
+        200:
+          description: Transaction updated successfully
+          schema:
+            $ref: "#/definitions/TransactionDetailResponse"
+        400:
+          description: Invalid request body
+        401:
+          description: Unauthorized
+        404:
+          description: Transaction not found
+        500:
+          description: Internal server error
+
+definitions:
+
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique transaction ID
+      date:
+        type: string
+        description: Transaction date
+      description:
+        type: string
+        description: Transaction description
+      amount:
+        type: number
+        description: Transaction amount
+      balance:
+        type: number
+        description: Account balance after transaction
+      type:
+        type: string
+        description: Transaction type (e.g. Electronic)
+      category:
+        type: string
+        description: Transaction category (e.g. Food, Travel)
+      note:
+        type: string
+        description: User note on transaction
+
+  TransactionsResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 200
+      message:
+        type: string
+        example: Transactions retrieved successfully
+      body:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"
+
+  TransactionDetailResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+        example: 200
+      message:
+        type: string
+        example: Transaction retrieved successfully
+      body:
+        $ref: "#/definitions/Transaction"
+
+  TransactionUpdate:
+    type: object
+    properties:
+      category:
+        type: string
+        description: Updated category
+      note:
+        type: string
+        description: Updated note
