@@ -12,8 +12,8 @@ export const apiLogin = async (email,password) => {
 }
 
 export const apiGetProfile = async (token) => {
-  const res = await fetch('${BASE}/user/profile', {
-  header: { 'Authorization': `Bearer ${token}` }
+  const res = await fetch(`${BASE}/user/profile`, {
+    headers: { 'Authorization': `Bearer ${token}` }
   }) 
   if (!res.ok)  throw new Error('Profile fetch failed')
   const data = await res.json()
@@ -23,7 +23,7 @@ return data.body
 export const apiUpdateProfile  = async (token,username) => {
  const res = await fetch(`${BASE}/user/profile`, {
   method: 'PUT',
-  header: {
+  headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
    }, 

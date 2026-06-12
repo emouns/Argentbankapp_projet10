@@ -9,7 +9,7 @@ ReactDOM.createRoot(
   document.getElementById('root')
 ).render(
   <React.StrictMode>
-    <Provider store={store}>   // indispensable
+    <Provider store={store}>        {  /* indispensable */ }
       <App />
     </Provider>
   </React.StrictMode>
