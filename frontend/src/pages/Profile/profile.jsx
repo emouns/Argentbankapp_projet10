@@ -23,7 +23,7 @@ function Profile() {                                     // Récupère user et t
       <Navbar />
       <main className="main bg-dark">
         <div className="header">
-          {/* user?.firstName = sécurisé si user est null (optional chaining */} 
+          {/* user?.firstName = sécurisé si user est null  */} 
           <h1>Welcome back 
             <br/>{user?.firstName} {user?.lastName}!
           </h1>
