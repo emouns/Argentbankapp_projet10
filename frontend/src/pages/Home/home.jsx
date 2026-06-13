@@ -1,13 +1,15 @@
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
+// Import des images en WebP = Green Code (30% plus léger que PNG)
 import iconChat     from '../../assets/icon-chat.webp'
 import iconMoney    from '../../assets/icon-money.webp'
 import iconSecurity from '../../assets/icon-security.webp'
 
 function Home() {
   return (
+    // Le fragment <> </> = évite un div inutile autour de tout
     <>
-      <Navbar />
+      <Navbar />       //  La Nav est réutilisable : 1 ligne au lieu de tout recopier //
       <main>
         <div className="hero">
           <section className="hero-content">

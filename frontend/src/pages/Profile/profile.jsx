@@ -5,17 +5,17 @@ import { apiUpdateProfile } from '../../services/apiService'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 
-function Profile() {
-  const { user, token } = useSelector((s) => s.auth)
-  const dispatch = useDispatch()
-  const [isEditing, setIsEditing] = useState(false)
+function Profile() {                                     // Récupère user et token depuis le store Redux
+  const { user, token } = useSelector((s) => s.auth) 
+  const dispatch = useDispatch()                          
+  const [isEditing, setIsEditing] = useState(false)     // State LOCAL : ne concerne que l'UI de cette page
   const [newUserName, setNewUserName] =
     useState(user?.userName || '')
 
   const handleSave = async () => {
-    await apiUpdateProfile(token, newUserName)
-    dispatch(updateUser({ userName: newUserName }))
-    setIsEditing(false)
+    await apiUpdateProfile(token, newUserName)          // PUT vers l'API
+    dispatch(updateUser({ userName: newUserName }))     // sync le store → Navbar update automatiquement
+    setIsEditing(false)                                 // ferme le formulaire 
   }
 
   return (
@@ -23,9 +23,11 @@ function Profile() {
       <Navbar />
       <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back
+          {/* user?.firstName = sécurisé si user est null (optional chaining */} 
+          <h1>Welcome back 
             <br/>{user?.firstName} {user?.lastName}!
           </h1>
+          {/* Bascule entre formulaire et bouton selon isEditing */}                     
           {isEditing ? (
             <div>
               <input type="text"
@@ -45,7 +47,7 @@ function Profile() {
         </div>
 
         <h2 className="sr-only">Accounts</h2>
-
+        {/* 3 comptes statiques  Phase 2 les rendra dynamiques */}
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Checking (x8349)</h3>
@@ -56,7 +58,7 @@ function Profile() {
             <button className="transaction-button">View transactions</button>
           </div>
         </section>
-
+        {/*  2 autres sections account identiques */}
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Savings (x6712)</h3>

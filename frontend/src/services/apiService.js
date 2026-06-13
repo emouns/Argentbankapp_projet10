@@ -1,33 +1,33 @@
 const BASE = 'http://localhost:3001/api/v1'
-
+// FONCTION 1  Login  envoie email et password, reçoit un token JWT
 export const apiLogin = async (email,password) => {
     const res = await fetch(`${BASE}/user/login`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({ email, password })  
+      headers: { 'Content-Type': 'application/json'},    // dit au serveur que c'est du JSON
+      body: JSON.stringify({ email, password })          // objet JS pour texte JSON
     })
     if (!res.ok) throw new Error('Invalid credentials')
     const data = await res.json()
-    return data.body.token     
+    return data.body.token                              // vérifié : la réponse est  body avec token 
 }
-
+// FONCTION 2  Profil  envoie le token, reçoit les infos utilisateur
 export const apiGetProfile = async (token) => {
   const res = await fetch(`${BASE}/user/profile`, {
-    headers: { 'Authorization': `Bearer ${token}` }
+    headers: { 'Authorization': `Bearer ${token}` }     // token prouve l'identité
   }) 
   if (!res.ok)  throw new Error('Profile fetch failed')
   const data = await res.json()
-return data.body  
+return data.body                                        // { id, email, firstName, lastName, userName }
 }
-
+// FONCTION 3  Modifier le username  envoie token et nouveau userName
 export const apiUpdateProfile  = async (token,username) => {
  const res = await fetch(`${BASE}/user/profile`, {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`
+    'Authorization': `Bearer ${token}`                   // token requis pour les routes protégées
    }, 
-    body: JSON.stringify({ username })  
+    body: JSON.stringify({ username })                  // seul le username peut être modifié
  })
  if (!res.ok) throw new Error ('Update failed')
     const data = await res.json()

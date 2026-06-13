@@ -4,14 +4,14 @@ import { logout } from '../store/authSlice'
 import logo from '../assets/argentBankLogo.webp'
 
 function  Navbar() {
-  const  { user, isAuthenticated } =
-     useSelector((s) => s.auth )
+  const  { user, isAuthenticated } =        // useSelector  lit les données depuis le store Redux
+     useSelector((s) => s.auth )        
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
   const handleLogout = () => {
-     dispatch(logout())
-     navigate('/')
+     dispatch(logout())                     // vide le store quand isAuthenticated est false
+     navigate('/')                          // redirige vers la page d'accueil
 }
 
 return (
