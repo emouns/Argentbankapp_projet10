@@ -71,7 +71,7 @@ body {
 }
 
 .hero {
-  background-image: url("/bank-tree.webp"); /* converted to webp for performance (Green Code)*/
+  background-image: url("/bank-tree.webp"); /* converti en format webp pour améliorer les performances (Green Code)*/
   background-position: 0 -50px;
   background-size: cover;
   background-repeat: no-repeat;

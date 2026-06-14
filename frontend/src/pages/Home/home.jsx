@@ -1,7 +1,7 @@
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
-// Import des images en WebP = Green Code (30% plus léger que PNG)
-import iconChat     from '../../assets/icon-chat.webp'
+// Importe les images optimisées depuis assets/
+import iconChat     from '../../assets/icon-chat.webp'   // converti en .webp pour le poids (green code)
 import iconMoney    from '../../assets/icon-money.webp'
 import iconSecurity from '../../assets/icon-security.webp'
 
@@ -9,7 +9,7 @@ function Home() {
   return (
     // Le fragment <> </> = évite un div inutile autour de tout
     <>
-      <Navbar />       //  La Nav est réutilisable : 1 ligne au lieu de tout recopier //
+      <Navbar />       { /* La Nav est réutilisable : 1 ligne au lieu de tout recopier // */}
       <main>
         <div className="hero">
           <section className="hero-content">
@@ -23,7 +23,7 @@ function Home() {
 
         <section className="features">
           <h2 className="sr-only">Features</h2>
-
+                       { /* Chaque feature-item est identique  idéal pour un composant FeatureItem */}
           <div className="feature-item">
             <img src={iconChat} alt="Chat"
               className="feature-icon"/>
@@ -32,7 +32,8 @@ function Home() {
             </h3>
             <p>24/7 chat support.</p>
           </div>
-
+                      { /* répète pour icon-money et icon-security avec leur texte */}
+          <div className="feature-item"></div>
           <div className="feature-item">
             <img src={iconMoney} alt="Money"
               className="feature-icon"/>

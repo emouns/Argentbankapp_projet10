@@ -1,21 +1,23 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { loginUser } from '../../store/authSlice'
+import { loginUser } from '../../store/authSlice'     // thunk = action asynchrone Redux
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 
-function Login() {                  // State LOCAL : email et password ne concernent que ce composant
+function Login() {                  // useState gère les valeurs des champs du formulaire localement
   const [email, setEmail]       = useState('')
   const [password, setPassword] = useState('')
   const dispatch  = useDispatch()
   const navigate  = useNavigate()
+  // On lit l'état "loading" et "error" depuis Redux pour les afficher
   const { isLoading, error } = useSelector((s) => s.auth)
 
   const handleSubmit = async (e) => {
-    e.preventDefault()              // bloque le rechargement de page (comportement HTML natif)
+    e.preventDefault()              // empêche le rechargement de la page
+    // dispatch(loginUser) appelle l'API, attend la réponse, met à jour Redux
     const result = await dispatch(loginUser({ email, password }))
-    // loginUser.fulfilled.match(result) vérifie si l'action a réussi
+    // Si le login réussit (action "fulfilled"),  redirige vers le profil
     if (loginUser.fulfilled.match(result))
       navigate('/profile')          // redirection vers le dashboard
   }
@@ -27,7 +29,7 @@ function Login() {                  // State LOCAL : email et password ne concer
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
           <h1>Sign In</h1>      
-          {/* onSubmit sur le form = meilleure pratique que onClick sur le bouton */}
+          {/* onSubmit sur le form déclenche handleSubmit quand on clique le bouton */}
           <form onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <label htmlFor="email">Email</label>
@@ -37,17 +39,16 @@ function Login() {                  // State LOCAL : email et password ne concer
             </div>
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>
-                {/*  value et onChange = React contrôle l'input */}
+                {/* onChange met à jour le state local à chaque frappe */}
               <input type="password" id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
             </div>
             {/* Affiche le message d'erreur si identifiants incorrects */}
-            {error && <p style={{color:'red'}}>{error}</p>}
-            {/* desactivé pendant l'appel API  empêche le double-clic */}
+            {error && <p style={{color:'red'}}>{error}</p>}  
             <button className="sign-in-button"
               type="submit" disabled={isLoading}>
-              {isLoading ? 'Connexion...' : 'Sign In'}
+              {isLoading ? 'Connexion...' : 'Sign In'}       {/* feedback visuel pendant l'appel API*/}
             </button>
           </form>
         </section>

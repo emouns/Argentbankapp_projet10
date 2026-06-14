@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route }
 import Home         from './pages/Home/home'
 import Login        from './pages/Login/login'
 import Profile      from './pages/Profile/profile'
-import PrivateRoute from './components/PrivateRoute'
+import PrivateRoute from './components/PrivateRoute'      // garde qui bloque les non-connectés
 
 function App() {
   return (
-    <BrowserRouter>        //  BrowserRouter = navigation sans rechargement de page entière //
+    <BrowserRouter>        {/* BrowserRouter active la navigation sans rechargement de page  */}
       <Routes>
         {/* Routes publiques : accessibles sans connexion */}
         <Route path="/"        element={<Home/>}     />

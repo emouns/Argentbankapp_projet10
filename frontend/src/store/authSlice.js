@@ -7,10 +7,11 @@ export const loginUser = createAsyncThunk(
    'auth/loginUser',
    async ({email, password }, thunkAPI) => {
     try {
-      const token = await apiLogin(email, password) // recupération du token 
-      const  user = await apiGetProfile(token)      // récupération du profil
-      return { token, user  }                       // va dans fulfilled
-    } catch (err) {                                 // va dans rejected
+      const token = await apiLogin(email, password) // appelle l'API, récupère le token 
+      const  user = await apiGetProfile(token)      // utilise le token pour récupérer le profil
+      return { token, user  }                       // ces données iront dans state.auth
+    } catch (err) {                                 
+      // rejectWithValue envoie le message d'erreur dans state.auth.error
       return thunkAPI.rejectWithValue(err.message)  
     }
    }
@@ -18,41 +19,46 @@ export const loginUser = createAsyncThunk(
 
 const authSlice = createSlice({
   name: 'auth',
+ // État initial : pas connecté, pas de données 
   initialState: {
-    user: null,       // firstaname, lastname, username etc..
-    token: null,      // le JWT (clé accés à l'API)
-    isAuthenticated: false,  // lu par privateRoute qui bloque ou autoriser 
-    isLoading: false,        // affiche la connexion dans le bouton
+    user: null,               // contient  firstName, lastName, userName, email 
+    token: null,             // le JWT reçu après login 
+    isAuthenticated: false,  // booléen utilisé pour protéger les routes  
+    isLoading: false,        // true pendant l'appel API affiche "Connexion"
     error: null              // affiche un message d'erreur si login raté
   },
   reducers: {
-    // action synchrone vide le store = déconnexion
+    // logout = action synchrone : remet tout à zéro
     logout:(state) => {
       state.user = null
       state.token = null
       state.isAuthenticated = false
       state.error = null  
     },
-    // Met à jour le username  Navbar et Profile se mettent à jour auto
+    // updateUser = action pour mettre à jour le userName après édition
     updateUser: (state, action) => {
         state.user = { ...state.user, ...action.payload}
     }
   },
+    // extraReducers gère les 3 états automatiques du thunk loginUser
   extraReducers: (builder) => {
     builder
+    // pending : l'appel API est en cours
     .addCase(loginUser.pending, (state) => {
        state.isLoading = true      // bouton de Connexion
        state.error = null 
     })
+    // fulfilled : l'API a répondu avec succès  on stocke tout
     .addCase(loginUser.fulfilled, (state, action) => {
        state.isLoading = false
        state.isAuthenticated = true   // PrivateRoute laisse passer car c'ests true
        state.token = action.payload.token
        state.user = action.payload.user 
     })
+    // rejected : identifiants incorrects ou serveur en panne
     .addCase(loginUser.rejected, (state, action) => {
        state.isLoading =false
-       state.error = action.payload    // affiché en rouge dans Login.jsx
+       state.error = action.payload    // affichera "Invalid credentials" etc. car c'est false
     })
   }  
 })

@@ -4,16 +4,16 @@ export const apiLogin = async (email,password) => {
     const res = await fetch(`${BASE}/user/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},    // dit au serveur que c'est du JSON
-      body: JSON.stringify({ email, password })          // objet JS pour texte JSON
+      body: JSON.stringify({ email, password })          // il converti objet JS en texte JSON
     })
-    if (!res.ok) throw new Error('Invalid credentials')
+    if (!res.ok) throw new Error('Invalid credentials')   // sera capturé par rejectWithValue dans authSlice
     const data = await res.json()
-    return data.body.token                              // vérifié : la réponse est  body avec token 
+    return data.body.token                              // on ne retourne que le token, pas tout le JSON
 }
-// FONCTION 2  Profil  envoie le token, reçoit les infos utilisateur
+// FONCTION 2  Profil  envoie le token, reçoit les infos du profil utilisateur
 export const apiGetProfile = async (token) => {
   const res = await fetch(`${BASE}/user/profile`, {
-    headers: { 'Authorization': `Bearer ${token}` }     // token prouve l'identité
+    headers: { 'Authorization': `Bearer ${token}` }     // le token prouve que l'utilisateur est authentifié
   }) 
   if (!res.ok)  throw new Error('Profile fetch failed')
   const data = await res.json()

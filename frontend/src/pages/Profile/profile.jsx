@@ -8,14 +8,14 @@ import Footer from '../../components/Footer'
 function Profile() {                                     // Récupère user et token depuis le store Redux
   const { user, token } = useSelector((s) => s.auth) 
   const dispatch = useDispatch()                          
-  const [isEditing, setIsEditing] = useState(false)     // State LOCAL : ne concerne que l'UI de cette page
+  const [isEditing, setIsEditing] = useState(false)     // affiche/cache le formulaire
   const [newUserName, setNewUserName] =
     useState(user?.userName || '')
 
   const handleSave = async () => {
-    await apiUpdateProfile(token, newUserName)          // PUT vers l'API
-    dispatch(updateUser({ userName: newUserName }))     // sync le store → Navbar update automatiquement
-    setIsEditing(false)                                 // ferme le formulaire 
+    await apiUpdateProfile(token, newUserName)          // envoie la modification à l'API
+    dispatch(updateUser({ userName: newUserName }))     // met à jour le store et la navbar se met à jour aussi
+    setIsEditing(false)                                // referme le formulaire 
   }
 
   return (
@@ -27,12 +27,13 @@ function Profile() {                                     // Récupère user et t
           <h1>Welcome back 
             <br/>{user?.firstName} {user?.lastName}!
           </h1>
-          {/* Bascule entre formulaire et bouton selon isEditing */}                     
+          {/* Bascule entre le formulaire et le bouton Edit */}                     
           {isEditing ? (
             <div>
               <input type="text"
                 value={newUserName}
                 onChange={(e)=>setNewUserName(e.target.value)}/>
+                {/* Save appelle l'API puis ferme le formulaire */} 
               <button className="edit-button"
                 onClick={handleSave}>Save</button>
               <button className="edit-button"
@@ -47,7 +48,7 @@ function Profile() {                                     // Récupère user et t
         </div>
 
         <h2 className="sr-only">Accounts</h2>
-        {/* 3 comptes statiques  Phase 2 les rendra dynamiques */}
+        {/* 3 Comptes bancaires (données statiques en attendant la Phase 2)  */}
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Checking (x8349)</h3>
@@ -58,7 +59,6 @@ function Profile() {                                     // Récupère user et t
             <button className="transaction-button">View transactions</button>
           </div>
         </section>
-        {/*  2 autres sections account identiques */}
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Savings (x6712)</h3>
