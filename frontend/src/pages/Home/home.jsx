@@ -33,7 +33,7 @@ function Home() {
             <p>24/7 chat support.</p>
           </div>
                       { /* répète pour icon-money et icon-security avec leur texte */}
-          <div className="feature-item"></div>
+          
           <div className="feature-item">
             <img src={iconMoney} alt="Money"
               className="feature-icon"/>

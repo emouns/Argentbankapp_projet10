@@ -21,11 +21,11 @@ const authSlice = createSlice({
   name: 'auth',
  // État initial : pas connecté, pas de données 
   initialState: {
-    user: null,               // contient  firstName, lastName, userName, email 
-    token: null,             // le JWT reçu après login 
-    isAuthenticated: false,  // booléen utilisé pour protéger les routes  
-    isLoading: false,        // true pendant l'appel API affiche "Connexion"
-    error: null              // affiche un message d'erreur si login raté
+    user: null,                                                // contient  firstName, lastName, userName, email 
+    token: localStorage.getItem('token') || null,             //le JWT reçu après login, est sauvegardé dans localStorage 
+    isAuthenticated: !!localStorage.getItem('token'),        // true si un token existe dans localStorage au démarrage ou après login  
+    isLoading: false,                                       // true pendant l'appel API affiche "Connexion"
+    error: null                                            // affiche un message d'erreur si login raté
   },
   reducers: {
     // logout = action synchrone : remet tout à zéro
@@ -33,7 +33,8 @@ const authSlice = createSlice({
       state.user = null
       state.token = null
       state.isAuthenticated = false
-      state.error = null  
+      state.error = null
+      localStorage.removeItem('token')  
     },
     // updateUser = action pour mettre à jour le userName après édition
     updateUser: (state, action) => {
@@ -53,7 +54,8 @@ const authSlice = createSlice({
        state.isLoading = false
        state.isAuthenticated = true   // PrivateRoute laisse passer car c'ests true
        state.token = action.payload.token
-       state.user = action.payload.user 
+       state.user = action.payload.user
+       localStorage.setItem('token', action.payload.token) 
     })
     // rejected : identifiants incorrects ou serveur en panne
     .addCase(loginUser.rejected, (state, action) => {
