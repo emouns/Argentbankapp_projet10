@@ -6,7 +6,7 @@ import App from './App'                     // composant racine qui contient tou
 import './assets/main.css'                 // CSS global pour toute l'app
 
 ReactDOM.createRoot(
-  document.getElementById('root')          // pointe vers <div id="root"> dans index.html
+  document.getElementById('root')          // pointe vers dans index.html
 ).render(
   <React.StrictMode>              {  /*  Provider rend le store accessible dans TOUS les composants enfants*/}
                                    {/*  Sans lui useSelector et useDispatch ne fonctionnent pas */}

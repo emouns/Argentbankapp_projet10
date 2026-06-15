@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'                          // il creer une variable locale dans un composant 
+import { useDispatch, useSelector } from 'react-redux'    // selector lit une valeur dans store redux depuis react,dispatch envoie une action au store redux pour modifier les données
+import { useNavigate } from 'react-router-dom'         // permet de changer la page 
 import { loginUser } from '../../store/authSlice'     // thunk = action asynchrone Redux
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
