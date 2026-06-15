@@ -12,8 +12,8 @@ function App() {
         {/* Routes publiques : accessibles sans connexion */}
         <Route path="/"        element={<Home/>}     />
         <Route path="/login"   element={<Login/>}    />
-        // Route privée : PrivateRoute vérifie isAuthenticated //
-        // Si non connecté il redirige vers /login automatiquement //
+        { /* Route privée : PrivateRoute vérifie isAuthenticated*/} 
+        { /* Si non connecté il redirige vers /login automatiquement */} 
         <Route path="/profile" element={
           <PrivateRoute><Profile/></PrivateRoute>
         } />

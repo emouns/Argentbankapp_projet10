@@ -1,5 +1,5 @@
 const BASE = 'http://localhost:3001/api/v1'
-// FONCTION 1  Login  envoie email et password, reçoit un token JWT
+//   Login  envoie email et password, reçoit un token JWT
 export const apiLogin = async (email,password) => {
     const res = await fetch(`${BASE}/user/login`, {
       method: 'POST',
