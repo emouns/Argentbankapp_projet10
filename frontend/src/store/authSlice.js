@@ -60,7 +60,7 @@ const authSlice = createSlice({
     // rejected : identifiants incorrects ou serveur en panne
     .addCase(loginUser.rejected, (state, action) => {
        state.isLoading =false
-       state.error = action.payload    // affichera "Invalid credentials" etc. car c'est false
+       state.error = action.payload    // affichera le message d'erreur retourné par rejectWithValue
     })
   }  
 })
