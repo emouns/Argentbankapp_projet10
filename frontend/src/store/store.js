@@ -3,7 +3,7 @@ import authReducer from './authSlice'          // le reducer va gèrer l'état d
 
 export const store = configureStore({
 reducer: {
-    // "auth" est le nom que j'utiliserai dans useSelector : state.auth.user
-    auth: authReducer
+                                    // "auth" est le nom que j'utiliserai dans useSelector : state.auth.user
+    auth: authReducer              // auth est la clé d'accès au reducer dans tous les composants  //
   }
 })
