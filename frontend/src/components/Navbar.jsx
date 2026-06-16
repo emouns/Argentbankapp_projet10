@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'     // Link évite le rechargement de page, useNavigate me permet de rediriger après le logout
+import { useSelector, useDispatch } from 'react-redux'   // useSelector pour lire le store, useDispatch pour envoyer une action
 import { logout } from '../store/authSlice'         // action Redux pour déconnecter
 import logo from '../assets/argentBankLogo.webp'
 
