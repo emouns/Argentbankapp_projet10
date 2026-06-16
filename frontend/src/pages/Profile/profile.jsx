@@ -23,18 +23,18 @@ function Profile() {                                     // Récupère user et t
       <Navbar />
       <main className="main bg-dark">
         <div className="header">
-          {/* user?.firstName = sécurisé si user est null  */} 
+          {/* évite un crash si user est null au chargement  */} 
           <h1>Welcome back 
             <br/>{user?.firstName} {user?.lastName}!       {/* Affiche le prénom et nom récupérés depuis le store Redux */}        
           </h1>
-          {/* Bascule entre le formulaire et le bouton Edit */}                     
+          {/* Bascule entre le formulaire mode édition  et le bouton Edit name */}                     
           {isEditing ? (
             <div>               
               {/* si isEditing est true affiche input + Save + Cancel, sinon affiche uniquement le bouton Edit Name */}
               <input type="text"                                
                 value={newUserName}
                 onChange={(e)=>setNewUserName(e.target.value)}/>
-                {/* Save appelle l'API puis ferme le formulaire */} 
+                {/* Save envoie la modification à l'API et ferme le formulaire  */} 
               <button className="edit-button"
                 onClick={handleSave}>Save</button>
               <button className="edit-button"

@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom'      // redirige vers une autre page
 function PrivateRoute({ children }) {
   const { isAuthenticated } =
     useSelector((s) => s.auth)
+    
 // Pas connecté l'utilisateur est redirigé vers /login ( redirection coté client)
   if (!isAuthenticated)
     return <Navigate to="/login" replace />
