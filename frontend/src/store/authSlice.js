@@ -41,12 +41,12 @@ const authSlice = createSlice({
         state.user = { ...state.user, ...action.payload}
     }
   },
-    // extraReducers gère les 3 états automatiques du thunk loginUser
+    // extraReducers gère les 3 états automatiques créés par createAsyncThunk, sans lui le store ne se mettrait pas à jour après un appel API
   extraReducers: (builder) => {
     builder
     // pending : l'appel API est en cours
     .addCase(loginUser.pending, (state) => {
-       state.isLoading = true      // bouton de Connexion
+       state.isLoading = true      // affiche Connexion sur le bouton
        state.error = null 
     })
     // fulfilled : l'API a répondu avec succès  on stocke tout
