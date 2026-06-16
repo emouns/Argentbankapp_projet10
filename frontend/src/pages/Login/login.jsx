@@ -1,5 +1,5 @@
 import { useState } from 'react'                          // il creer une variable locale dans un composant 
-import { useDispatch, useSelector } from 'react-redux'    // selector lit une valeur dans store redux depuis react,dispatch envoie une action au store redux pour modifier les données
+import { useDispatch, useSelector } from 'react-redux'    // // useSelector lit une valeur dans le store Redux, useDispatch envoie une action pour modifier le store
 import { useNavigate } from 'react-router-dom'         // permet de changer la page 
 import { loginUser } from '../../store/authSlice'     // thunk = action asynchrone Redux
 import Navbar from '../../components/Navbar'
