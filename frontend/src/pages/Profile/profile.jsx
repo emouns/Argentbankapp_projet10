@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { updateUser } from '../../store/authSlice'
-import { apiUpdateProfile } from '../../services/apiService'
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
+import { useState } from 'react'                              // gère l'état local du formulaire
+import { useSelector, useDispatch } from 'react-redux'         // useSelector lit le store, useDispatch envoie une action
+import { updateUser } from '../../store/authSlice'            // action Redux pour mettre à jour le userName dans le store
+import { apiUpdateProfile } from '../../services/apiService'  // envoie la modification au backend
+import Navbar from '../../components/Navbar'                  // composant réutilisable
+import Footer from '../../components/Footer'                 // composant réutilisable
 
 function Profile() {                                     // Récupère user et token depuis le store Redux
   const { user, token } = useSelector((s) => s.auth) 
