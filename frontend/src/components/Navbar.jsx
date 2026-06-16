@@ -10,7 +10,7 @@ function  Navbar() {
   const navigate = useNavigate()
   
   const handleLogout = () => {
-     dispatch(logout())                     // vide le store supprime token + infos user quand isAuthenticated est false
+     dispatch(logout())                     // vide le store : supprime le token et les infos utilisateur
      navigate('/')                          // redirige vers la page d'accueil
 }
 

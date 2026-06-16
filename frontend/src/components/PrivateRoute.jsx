@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-// children = tout ce qu'on met entre <PrivateRoute> et </PrivateRoute> (ici <Profile />)
+// children = tout ce qu'on met entre <PrivateRoute> et </PrivateRoute> ( ici <Profile /> dans app.jsx)
 function PrivateRoute({ children }) {
   const { isAuthenticated } =
     useSelector((s) => s.auth)
