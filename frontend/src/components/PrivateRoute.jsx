@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'         // lit isAuthenticated dans le store Redux
+import { Navigate } from 'react-router-dom'      // redirige vers une autre page sans rechargement
 // children = tout ce qu'on met entre <PrivateRoute> et </PrivateRoute> ( ici <Profile /> dans app.jsx)
 function PrivateRoute({ children }) {
   const { isAuthenticated } =
