@@ -1,16 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom'     // Link évite le rechargement de page, useNavigate me permet de rediriger après le logout
+import { Link, useNavigate } from 'react-router-dom'      // Link évite le rechargement de page, useNavigate me permet de rediriger après le logout
 import { useSelector, useDispatch } from 'react-redux'   // useSelector pour lire le store, useDispatch pour envoyer une action
-import { logout } from '../store/authSlice'         // action Redux pour déconnecter
+import { logout } from '../store/authSlice'             // action Redux pour déconnecter
 import logo from '../assets/argentBankLogo.webp'
 
-function  Navbar() {
+function  Navbar() {                         // présente sur toutes les pages, son affichage change selon isAuthenticated
   const  { user, isAuthenticated } =        // useSelector lit une valeur dans le store Redux
      useSelector((s) => s.auth )        
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
   const handleLogout = () => {
-     dispatch(logout())                     // vide le store : supprime le token et les infos utilisateur
+     dispatch(logout())                      // vide le store : supprime le token et les infos utilisateur
      navigate('/')                          // redirige vers la page d'accueil
 }
 

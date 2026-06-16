@@ -49,7 +49,7 @@ function Profile() {                                     // Récupère user et t
         </div>
 
         <h2 className="sr-only">Accounts</h2>
-        {/* 3 Comptes bancaires (données statiques en attendant la Phase 2)  */}
+        {/* 3 Comptes bancaires (données statiques ) */}
         <section className="account">
           <div className="account-content-wrapper">
             <h3 className="account-title">Argent Bank Checking (x8349)</h3>
