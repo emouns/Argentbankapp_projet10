@@ -23,7 +23,8 @@ function Login() {                  // useState gère les valeurs des champs du 
   }
 
   return (
-    <>
+    // formulaire de connexion //
+    <>            
       <Navbar />
       <main className="main bg-dark">
         <section className="sign-in-content">
@@ -33,22 +34,22 @@ function Login() {                  // useState gère les valeurs des champs du 
           <form onSubmit={handleSubmit}>
             <div className="input-wrapper">
               <label htmlFor="email">Email</label>
-              <input type="email" id="email"
+              <input type="email" id="email"                 // champ email 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}/>
             </div>
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>
                 {/* onChange met à jour le state local à chaque frappe */}
-              <input type="password" id="password"
+              <input type="password" id="password"           // champ password 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            {/* Affiche le message d'erreur si identifiants incorrects */}
+            {/*   message d'erreur si identifiants incorrects */}
             {error && <p style={{color:'red'}}>{error}</p>}  
             <button className="sign-in-button"
-              type="submit" disabled={isLoading}>
-              {isLoading ? 'Connexion...' : 'Sign In'}       {/* feedback visuel pendant l'appel API*/}
+              type="submit" disabled={isLoading}>             {/* bouton submit*/}
+              {isLoading ? 'Connexion...' : 'Sign In'}       
             </button>
           </form>
         </section>
