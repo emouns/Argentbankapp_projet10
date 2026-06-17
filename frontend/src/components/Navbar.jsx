@@ -4,8 +4,8 @@ import { logout } from '../store/authSlice'             // action Redux pour dé
 import logo from '../assets/argentBankLogo.webp'
 
 function  Navbar() {                         // présente sur toutes les pages, son affichage change selon isAuthenticated
-  const  { user, isAuthenticated } =        // useSelector lit une valeur dans le store Redux
-     useSelector((s) => s.auth )        
+  const  { user, isAuthenticated } =       
+     useSelector((s) => s.auth )                   // useSelector lit une valeur dans le store Redux
   const dispatch = useDispatch()
   const navigate = useNavigate()
   

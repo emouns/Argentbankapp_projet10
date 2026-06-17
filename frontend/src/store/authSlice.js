@@ -46,13 +46,13 @@ const authSlice = createSlice({
     builder
     // pending : l'appel API est en cours
     .addCase(loginUser.pending, (state) => {
-       state.isLoading = true      // affiche Connexion sur le bouton
+       state.isLoading = true      // affiche "Connexion..."  sur le bouton
        state.error = null 
     })
     // fulfilled : l'API a répondu avec succès  on stocke tout
     .addCase(loginUser.fulfilled, (state, action) => {
        state.isLoading = false
-       state.isAuthenticated = true   // PrivateRoute laisse passer car c'ests true
+       state.isAuthenticated = true   // PrivateRoute laisse passer car c'est true
        state.token = action.payload.token
        state.user = action.payload.user
        localStorage.setItem('token', action.payload.token) 
