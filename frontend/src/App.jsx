@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route }
-  from 'react-router-dom'
+from 'react-router-dom'
 import Home         from './pages/Home/home'                  //page d'accceuil
 import Login        from './pages/Login/login'               //page de connexion
 import Profile      from './pages/Profile/profile'          // affiche dashboard et username

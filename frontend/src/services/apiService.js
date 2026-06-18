@@ -20,14 +20,14 @@ export const apiGetProfile = async (token) => {
 return data.body                                        // { id, email, firstName, lastName, userName }
 }
 // FONCTION 3  Modifier le username  envoie token et nouveau userName
-export const apiUpdateProfile  = async (token,username) => {
+export const apiUpdateProfile  = async (token,userName) => {
  const res = await fetch(`${BASE}/user/profile`, {
   method: 'PUT',
   headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`                   // token requis pour les routes protégées
    }, 
-    body: JSON.stringify({ username })                  // seul le username peut être modifié
+    body: JSON.stringify({ userName })                  // seul le username peut être modifié
  })
  if (!res.ok) throw new Error ('Update failed')
     const data = await res.json()
