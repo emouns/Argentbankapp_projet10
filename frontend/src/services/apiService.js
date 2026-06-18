@@ -20,7 +20,7 @@ export const apiGetProfile = async (token) => {
 return data.body                                        // { id, email, firstName, lastName, userName }
 }
 // FONCTION 3  Modifier le username  envoie token et nouveau userName
-export const apiUpdateProfile  = async (token,userName) => {
+export const apiUpdateProfile  = async (token,userName) => {           //bug usernmane ligne 23 et 30 remplacer par userName (rest en memoire)
  const res = await fetch(`${BASE}/user/profile`, {
   method: 'PUT',
   headers: {
