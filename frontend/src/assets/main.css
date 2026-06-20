@@ -60,6 +60,16 @@ body {
   text-decoration: underline;
 }
 
+.main-nav-item.btn-logout {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0;
+  color: inherit;
+}
+
 .main-nav-logo {
   display: flex;
   align-items: center;

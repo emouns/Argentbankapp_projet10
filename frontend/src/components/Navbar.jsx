@@ -29,8 +29,8 @@ return (
               <i className="fa fa-user-circle"></i>
               {user?.userName}           { /* affiche le pseudo de l'utilisateur connecté */}
             </Link>
-            <button className="main-nav-item"
-              onClick={handleLogout}>
+            <button className="main-nav-item btn-logout"
+               onClick={handleLogout}>
               <i className="fa fa-sign-out"></i>
               Sign Out
             </button>
