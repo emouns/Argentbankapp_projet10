@@ -1,48 +1,57 @@
-import { useState } from 'react'                              // gère l'état local du formulaire
-import { useSelector, useDispatch } from 'react-redux'         // useSelector lit le store, useDispatch envoie une action
-import { updateUser } from '../../store/authSlice'            // action Redux pour mettre à jour le userName dans le store
-import { apiUpdateProfile } from '../../services/apiService'  // envoie la modification au backend
-import Navbar from '../../components/Navbar'                  // composant réutilisable
-import Footer from '../../components/Footer'                 // composant réutilisable
+import { useState } from "react"; // gère l'état local du formulaire
+import { useSelector, useDispatch } from "react-redux"; // useSelector lit le store, useDispatch envoie une action
+import { updateUser } from "../../store/authSlice"; // action Redux pour mettre à jour le userName dans le store
+import { apiUpdateProfile } from "../../services/apiService"; // envoie la modification au backend
+import Navbar from "../../components/Navbar"; // composant réutilisable
+import Footer from "../../components/Footer"; // composant réutilisable
 
-function Profile() {                                     // Récupère user et token depuis le store Redux
-  const { user, token } = useSelector((s) => s.auth) 
-  const dispatch = useDispatch()                          
-  const [isEditing, setIsEditing] = useState(false)     // affiche/cache le formulaire
-  const [newUserName, setNewUserName] =
-    useState(user?.userName || '')
+function Profile() {
+  // Récupère user et token depuis le store Redux
+  const { user, token } = useSelector((s) => s.auth);
+  const dispatch = useDispatch();
+  const [isEditing, setIsEditing] = useState(false); // affiche/cache le formulaire
+  const [newUserName, setNewUserName] = useState(user?.userName || "");
 
   const handleSave = async () => {
-    await apiUpdateProfile(token, newUserName)          // envoie la modification à l'API
-    dispatch(updateUser({ userName: newUserName }))     // met à jour le store et la navbar se met à jour aussi
-    setIsEditing(false)                                // referme le formulaire 
-  }
+    await apiUpdateProfile(token, newUserName); // envoie la modification à l'API
+    dispatch(updateUser({ userName: newUserName })); // met à jour le store et la navbar se met à jour aussi
+    setIsEditing(false); // referme le formulaire
+  };
 
   return (
     <>
       <Navbar />
       <main className="main bg-dark">
         <div className="header">
-          {/* évite un crash si user est null au chargement  */} 
-          <h1>Welcome back 
-            <br/>{user?.firstName} {user?.lastName}!       {/* Affiche le prénom et nom récupérés depuis le store Redux */}        
+          {/* évite un crash si user est null au chargement  */}
+          <h1>
+            Welcome back
+            <br />
+            {user?.firstName} {user?.lastName}!{" "}
+            {/* Affiche le prénom et nom récupérés depuis le store Redux */}
           </h1>
-          {/* Bascule entre le formulaire mode édition  et le bouton Edit name */}                     
+          {/* Bascule entre le formulaire mode édition  et le bouton Edit name */}
           {isEditing ? (
-            <div>               
+            <div>
               {/* si isEditing est true affiche input + Save + Cancel, sinon affiche uniquement le bouton Edit Name */}
-              <input type="text"                                
+              <input
+                type="text"
                 value={newUserName}
-                onChange={(e)=>setNewUserName(e.target.value)}/>
-                {/* Save envoie la modification à l'API et ferme le formulaire  */} 
-              <button className="edit-button"
-                onClick={handleSave}>Save</button>
-              <button className="edit-button"
-                onClick={()=>setIsEditing(false)}>Cancel</button>
+                onChange={(e) => setNewUserName(e.target.value)}
+              />
+              {/* Save envoie la modification à l'API et ferme le formulaire  */}
+              <button className="edit-button" onClick={handleSave}>
+                Save
+              </button>
+              <button
+                className="edit-button"
+                onClick={() => setIsEditing(false)}
+              >
+                Cancel
+              </button>
             </div>
           ) : (
-            <button className="edit-button"
-              onClick={()=>setIsEditing(true)}>
+            <button className="edit-button" onClick={() => setIsEditing(true)}>
               Edit Name
             </button>
           )}
@@ -81,10 +90,9 @@ function Profile() {                                     // Récupère user et t
             <button className="transaction-button">View transactions</button>
           </div>
         </section>
-
       </main>
       <Footer />
     </>
-  )
+  );
 }
-export default Profile
+export default Profile;
