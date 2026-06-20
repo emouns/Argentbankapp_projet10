@@ -11,7 +11,7 @@ ReactDOM.createRoot(
   <React.StrictMode>     {/* outil de détection d'erreurs en développement */}          
     { /*  Provider rend le store accessible dans TOUS les composants enfants*/}
     { /*  Sans lui useSelector et useDispatch ne fonctionnent pas */}
-    <Provider store={store}>    {  /* indispensable */ }
+    <Provider store={store}>    {  /* composant Provider et la prop store  */ }
       <App />
     </Provider>
   </React.StrictMode>
