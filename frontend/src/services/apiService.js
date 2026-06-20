@@ -16,8 +16,8 @@ export const apiGetProfile = async (token) => {
     headers: { 'Authorization': `Bearer ${token}` }     // le token prouve que l'utilisateur est authentifié
   }) 
   if (!res.ok)  throw new Error('Profile fetch failed')
-  const data = await res.json()
-return data.body                                        // { id, email, firstName, lastName, userName }
+      const data = await res.json()
+      return data.body                                       // { id, email, firstName, lastName, userName }
 }
 // FONCTION 3  Modifier le username  envoie token et nouveau userName
 export const apiUpdateProfile  = async (token,userName) => {           //bug usernmane ligne 23 et 30 remplacer par userName (rest en memoire)
@@ -31,5 +31,5 @@ export const apiUpdateProfile  = async (token,userName) => {           //bug use
  })
  if (!res.ok) throw new Error ('Update failed')
     const data = await res.json()
-return data.body   
+    return data.body   
 }

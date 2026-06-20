@@ -23,7 +23,7 @@ function Home() {
 
         <section className="features">
           <h2 className="sr-only">Features</h2>
-                       { /* Chaque feature-item est identique  idéal pour un composant FeatureItem */}
+                      
           <div className="feature-item">
             <img src={iconChat} alt="Chat"
               className="feature-icon"/>
