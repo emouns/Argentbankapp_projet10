@@ -20,7 +20,7 @@ function Home() {
             <p className="text">Open a savings account today!</p>
           </section>
         </div>
-
+                       
         <section className="features">
           <h2 className="sr-only">Features</h2>
                       
